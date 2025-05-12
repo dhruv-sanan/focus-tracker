@@ -12,7 +12,7 @@ const inter = Inter({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "MyFocusDash - Personalized Schedule App",
   description: "A personalized, time-aware daily schedule app designed for ADHD users",
-  manifest: "/manifest.json", // Keep manifest here
+  manifest: "/manifest.webmanifest", 
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
