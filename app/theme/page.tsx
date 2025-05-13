@@ -153,7 +153,7 @@ export default function ThemePage() {
         <div className="bg-white mt-6 dark:bg-gray-800 rounded-lg shadow-md p-6">
           <div className="space-y-6">
           <h2 className="text-lg font-medium mb-3">App Settings</h2>
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-3">
             {notificationsEnabled ? (
                 <Button variant="outline" className="flex items-center gap-1" onClick={handleDisableNotifications}>
                   <BellOff className="pr-1" />
