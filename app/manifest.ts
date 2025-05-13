@@ -11,16 +11,16 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: "#14b8a6",
     icons: [
       {
-        src: "/icons/icon-192x192.png",
+        src: "/icon/icon-192x192.png",
         sizes: "192x192",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "maskable", 
       },
       {
-        src: "/icons/icon-512x512.png",
+        src: "/favicon.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "maskable", 
       },
     ],
     orientation: "portrait",
@@ -30,16 +30,18 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/screenshots/mobile-home.png",
         sizes: "1170x2532",
         type: "image/png",
-        platform: "narrow",
-        label: "Home Screen of MyFocusDash",
       },
       {
         src: "/screenshots/mobile-summary.png",
-        sizes: "1170x2532",
+        sizes: "939x1552",
         type: "image/png",
-        platform: "narrow",
-        label: "Summary Screen of MyFocusDash",
-      },
+      },    
+      {
+        "src": "/screenshots/home.png",
+        "sizes": "1920x1080",
+        "type": "image/png",
+        "form_factor": "wide"
+      }
     ],
     prefer_related_applications: false,
   }

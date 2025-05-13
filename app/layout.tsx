@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   generator: 'v0.dev', // Keep generator or other metadata here
   // icons: { // Recommended way for icons instead of <link> in <head>
-  //   apple: '/icons/icon-192x192.png',
+  //   apple: '/favicon.png',
   // },
 }
 
@@ -49,7 +49,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         {/* Recommended to move icons to metadata object, but keeping for now if you have specific reasons */}
-        <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
+        <link rel="apple-touch-icon" href="/favicon.png" />
         <meta name="apple-mobile-web-app-capable" content="yes" /> {/* This is handled by metadata.appleWebApp.capable */}
         <meta name="apple-mobile-web-app-status-bar-style" content="default" /> {/* Handled by metadata.appleWebApp.statusBarStyle */}
         {/* Consider removing the above meta tags if relying solely on the metadata object */}

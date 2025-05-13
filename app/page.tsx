@@ -94,7 +94,7 @@ export default function Home() {
       if (Notification.permission === "granted") {
         new Notification("Task Started", {
           body: `Time to start: ${currentTask.description}`,
-          icon: "/icons/icon-192x192.png",
+          icon: "/favicon.png",
         })
       }
 
@@ -128,7 +128,7 @@ export default function Home() {
         if (Notification.permission === "granted") {
           new Notification("Upcoming Task", {
             body: `In ${Math.round(timeUntilStart)} minutes: ${task.description}`,
-            icon: "/icons/icon-192x192.png",
+            icon: "/favicon.png",
           })
         }
 
@@ -454,7 +454,7 @@ function sendPushNotification(data: { title: string; body: string; url: string; 
   if (Notification.permission === "granted") {
     new Notification(data.title, {
       body: data.body,
-      icon: "/icons/icon-192x192.png",
+      icon: "/favicon.png",
     })
   }
 }
