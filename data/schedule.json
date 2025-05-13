@@ -5,7 +5,7 @@
         "id": "mon01",
         "startTime": "06:00",
         "endTime": "06:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
@@ -19,92 +19,105 @@
         "id": "mon03",
         "startTime": "07:00",
         "endTime": "07:30",
-        "description": "Breakfast & Planning",
-        "category": "Routine"
+        "description": "Journaling & Emotional Regulation Practice",
+        "category": "Inner Mastery"
       },
       {
         "id": "mon04",
         "startTime": "07:30",
-        "endTime": "08:30",
-        "description": "Deep Work: Programming",
-        "category": "Outer Mastery"
+        "endTime": "08:15",
+        "description": "Breakfast & Mindful Eating, Plan Work Day",
+        "category": "Routine"
       },
       {
         "id": "mon05",
-        "startTime": "08:30",
-        "endTime": "09:00",
-        "description": "Break - Walk Outside",
+        "startTime": "08:15",
+        "endTime": "09:15",
+        "description": "Deep Work: Coding (Learning/Fundamentals)",
+        "category": "Outer Mastery"
+      },
+      {
+        "id": "mon06",
+        "startTime": "09:15",
+        "endTime": "09:30",
+        "description": "Transition: Break, Prepare for Work",
         "category": "Break"
       },
-      { "id": "mon06", "startTime": "09:00", "endTime": "10:30", "description": "Team Meeting", "category": "Work" },
       {
         "id": "mon07",
-        "startTime": "10:30",
-        "endTime": "12:00",
-        "description": "Project Development",
+        "startTime": "09:30",
+        "endTime": "13:00",
+        "description": "Office Work Block 1 (WFH)",
         "category": "Work"
       },
       {
         "id": "mon08",
-        "startTime": "12:00",
-        "endTime": "13:00",
-        "description": "Lunch & Short Walk",
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "description": "Lunch Break & Movement",
         "category": "Break"
       },
       {
         "id": "mon09",
-        "startTime": "13:00",
-        "endTime": "15:00",
-        "description": "Focused Coding Session",
+        "startTime": "14:00",
+        "endTime": "17:30",
+        "description": "Office Work Block 2 (WFH)",
         "category": "Work"
       },
       {
         "id": "mon10",
-        "startTime": "15:00",
-        "endTime": "15:30",
-        "description": "Break - Stretching",
-        "category": "Break"
-      },
-      {
-        "id": "mon11",
-        "startTime": "15:30",
-        "endTime": "17:00",
-        "description": "Email & Administrative Tasks",
+        "startTime": "17:30",
+        "endTime": "19:00",
+        "description": "Office Work Wrap-up / Lighter Tasks / Emails",
         "category": "Work"
       },
       {
+        "id": "mon11",
+        "startTime": "19:00",
+        "endTime": "19:45",
+        "description": "Dinner & Unwind",
+        "category": "Routine"
+      },
+      {
         "id": "mon12",
-        "startTime": "17:00",
-        "endTime": "18:00",
-        "description": "Exercise: Gym Workout",
+        "startTime": "19:45",
+        "endTime": "21:15",
+        "description": "Deep Work: Coding Projects / Portfolio",
         "category": "Outer Mastery"
       },
       {
         "id": "mon13",
-        "startTime": "18:00",
-        "endTime": "19:00",
-        "description": "Dinner Preparation & Eating",
-        "category": "Routine"
-      },
-      {
-        "id": "mon14",
-        "startTime": "19:00",
-        "endTime": "20:00",
-        "description": "Reading: Technical Book",
+        "startTime": "21:15",
+        "endTime": "21:45",
+        "description": "Connecting with Developers / Networking",
         "category": "Outer Mastery"
       },
       {
+        "id": "mon14",
+        "startTime": "21:45",
+        "endTime": "22:30",
+        "description": "Free Time / Hobby / Learning (Non-Coding)",
+        "category": "Wellbeing"
+      },
+      {
         "id": "mon15",
-        "startTime": "20:00",
-        "endTime": "21:00",
-        "description": "Journaling & Reflection",
-        "category": "Inner Mastery"
+        "startTime": "22:30",
+        "endTime": "23:15",
+        "description": "Wind-Down Routine, Prepare for Next Day, Reading",
+        "category": "Routine"
       },
       {
         "id": "mon16",
-        "startTime": "21:00",
-        "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "startTime": "23:15",
+        "endTime": "23:45",
+        "description": "Quiet Reflection / Light Stretching",
+        "category": "Inner Mastery"
+      },
+      {
+        "id": "mon17",
+        "startTime": "23:45",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
@@ -113,105 +126,126 @@
         "id": "tue01",
         "startTime": "06:00",
         "endTime": "06:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
         "id": "tue02",
         "startTime": "06:30",
         "endTime": "07:00",
-        "description": "Yoga Session",
+        "description": "Meditation",
         "category": "Inner Mastery"
       },
       {
         "id": "tue03",
         "startTime": "07:00",
         "endTime": "07:30",
-        "description": "Breakfast & Planning",
-        "category": "Routine"
+        "description": "Journaling & Emotional Regulation Practice",
+        "category": "Inner Mastery"
       },
       {
         "id": "tue04",
         "startTime": "07:30",
-        "endTime": "09:00",
-        "description": "Deep Work: Learning New Technology",
-        "category": "Outer Mastery"
+        "endTime": "08:30",
+        "description": "Breakfast, Get Ready for Office",
+        "category": "Routine"
       },
       {
         "id": "tue05",
-        "startTime": "09:00",
-        "endTime": "09:30",
-        "description": "Break - Mindfulness Practice",
-        "category": "Break"
-      },
-      {
-        "id": "tue06",
-        "startTime": "09:30",
-        "endTime": "11:30",
-        "description": "Code Review & Pair Programming",
-        "category": "Work"
-      },
-      {
-        "id": "tue07",
-        "startTime": "11:30",
-        "endTime": "12:30",
-        "description": "Lunch & Short Walk",
-        "category": "Break"
-      },
-      {
-        "id": "tue08",
-        "startTime": "12:30",
-        "endTime": "14:30",
-        "description": "Project Development",
-        "category": "Work"
-      },
-      {
-        "id": "tue09",
-        "startTime": "14:30",
-        "endTime": "15:00",
-        "description": "Break - Quick Exercise",
-        "category": "Break"
-      },
-      {
-        "id": "tue10",
-        "startTime": "15:00",
-        "endTime": "17:00",
-        "description": "Client Meeting & Follow-ups",
-        "category": "Work"
-      },
-      {
-        "id": "tue11",
-        "startTime": "17:00",
-        "endTime": "18:00",
-        "description": "Exercise: Running",
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "description": "Short Coding Review / Tech Learning (Podcast/Audio)",
         "category": "Outer Mastery"
       },
       {
-        "id": "tue12",
-        "startTime": "18:00",
+        "id": "tue06",
+        "startTime": "09:00",
+        "endTime": "09:30",
+        "description": "Commute to Office",
+        "category": "Routine"
+      },
+      {
+        "id": "tue07",
+        "startTime": "09:30",
+        "endTime": "13:00",
+        "description": "Office Work Block 1",
+        "category": "Work"
+      },
+      {
+        "id": "tue08",
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "description": "Lunch Break",
+        "category": "Break"
+      },
+      {
+        "id": "tue09",
+        "startTime": "14:00",
+        "endTime": "18:30",
+        "description": "Office Work Block 2",
+        "category": "Work"
+      },
+       {
+        "id": "tue10",
+        "startTime": "18:30",
         "endTime": "19:00",
-        "description": "Dinner Preparation & Eating",
+        "description": "Commute Home",
+        "category": "Routine"
+      },
+      {
+        "id": "tue11",
+        "startTime": "19:00",
+        "endTime": "19:45",
+        "description": "Arrive Home, Unwind, Prepare Dinner",
+        "category": "Routine"
+      },
+      {
+        "id": "tue12",
+        "startTime": "19:45",
+        "endTime": "20:30",
+        "description": "Dinner",
         "category": "Routine"
       },
       {
         "id": "tue13",
-        "startTime": "19:00",
-        "endTime": "20:30",
-        "description": "Side Project Work",
+        "startTime": "20:30",
+        "endTime": "21:45",
+        "description": "Focused Session: Coding Practice / Learning",
         "category": "Outer Mastery"
       },
       {
         "id": "tue14",
-        "startTime": "20:30",
-        "endTime": "21:30",
-        "description": "Relaxation: Music & Tea",
-        "category": "Inner Mastery"
+        "startTime": "21:45",
+        "endTime": "22:15",
+        "description": "Light Connecting / Tech Reading",
+        "category": "Outer Mastery"
       },
       {
         "id": "tue15",
-        "startTime": "21:30",
-        "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "startTime": "22:15",
+        "endTime": "22:45",
+        "description": "Prepare for Next Day, Tidy Up",
+        "category": "Routine"
+      },
+      {
+        "id": "tue16",
+        "startTime": "22:45",
+        "endTime": "23:15",
+        "description": "Wind-Down Routine: Reading (Non-Screen)",
+        "category": "Routine"
+      },
+       {
+        "id": "tue17",
+        "startTime": "23:15",
+        "endTime": "23:45",
+        "description": "Quiet Reflection / Light Stretching",
+        "category": "Inner Mastery"
+      },
+      {
+        "id": "tue18",
+        "startTime": "23:45",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
@@ -220,7 +254,7 @@
         "id": "wed01",
         "startTime": "06:00",
         "endTime": "06:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
@@ -234,198 +268,240 @@
         "id": "wed03",
         "startTime": "07:00",
         "endTime": "07:30",
-        "description": "Breakfast & Planning",
-        "category": "Routine"
+        "description": "Journaling & Emotional Regulation Practice",
+        "category": "Inner Mastery"
       },
       {
         "id": "wed04",
         "startTime": "07:30",
-        "endTime": "09:00",
-        "description": "Deep Work: Problem Solving",
-        "category": "Outer Mastery"
+        "endTime": "08:30",
+        "description": "Breakfast, Get Ready for Office",
+        "category": "Routine"
       },
       {
         "id": "wed05",
-        "startTime": "09:00",
-        "endTime": "09:30",
-        "description": "Break - Walk Outside",
-        "category": "Break"
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "description": "Short Coding Review / Tech Learning (Podcast/Audio)",
+        "category": "Outer Mastery"
       },
       {
         "id": "wed06",
-        "startTime": "09:30",
-        "endTime": "11:00",
-        "description": "Team Standup & Collaboration",
-        "category": "Work"
+        "startTime": "09:00",
+        "endTime": "09:30",
+        "description": "Commute to Office",
+        "category": "Routine"
       },
       {
         "id": "wed07",
-        "startTime": "11:00",
-        "endTime": "12:30",
-        "description": "Project Development",
+        "startTime": "09:30",
+        "endTime": "13:00",
+        "description": "Office Work Block 1",
         "category": "Work"
       },
       {
         "id": "wed08",
-        "startTime": "12:30",
-        "endTime": "13:30",
-        "description": "Lunch & Short Walk",
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "description": "Lunch Break",
         "category": "Break"
       },
       {
         "id": "wed09",
-        "startTime": "13:30",
-        "endTime": "15:30",
-        "description": "Focused Coding Session",
-        "category": "Work"
-      },
-      {
-        "id": "wed10",
-        "startTime": "15:30",
-        "endTime": "16:00",
-        "description": "Break - Stretching",
-        "category": "Break"
-      },
-      {
-        "id": "wed11",
-        "startTime": "16:00",
-        "endTime": "17:30",
-        "description": "Documentation & Knowledge Sharing",
-        "category": "Work"
-      },
-      {
-        "id": "wed12",
-        "startTime": "17:30",
+        "startTime": "14:00",
         "endTime": "18:30",
-        "description": "Exercise: Strength Training",
-        "category": "Outer Mastery"
+        "description": "Office Work Block 2",
+        "category": "Work"
       },
-      {
-        "id": "wed13",
+       {
+        "id": "wed10",
         "startTime": "18:30",
-        "endTime": "19:30",
-        "description": "Dinner Preparation & Eating",
+        "endTime": "19:00",
+        "description": "Commute Home",
         "category": "Routine"
       },
       {
+        "id": "wed11",
+        "startTime": "19:00",
+        "endTime": "19:45",
+        "description": "Arrive Home, Unwind, Prepare Dinner",
+        "category": "Routine"
+      },
+      {
+        "id": "wed12",
+        "startTime": "19:45",
+        "endTime": "20:30",
+        "description": "Dinner",
+        "category": "Routine"
+      },
+      {
+        "id": "wed13",
+        "startTime": "20:30",
+        "endTime": "21:45",
+        "description": "Focused Session: Coding Practice / Learning",
+        "category": "Outer Mastery"
+      },
+      {
         "id": "wed14",
-        "startTime": "19:30",
-        "endTime": "21:00",
-        "description": "Learning: Online Course",
+        "startTime": "21:45",
+        "endTime": "22:15",
+        "description": "Light Connecting / Tech Reading",
         "category": "Outer Mastery"
       },
       {
         "id": "wed15",
-        "startTime": "21:00",
-        "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "startTime": "22:15",
+        "endTime": "22:45",
+        "description": "Prepare for Next Day, Tidy Up",
+        "category": "Routine"
+      },
+      {
+        "id": "wed16",
+        "startTime": "22:45",
+        "endTime": "23:15",
+        "description": "Wind-Down Routine: Reading (Non-Screen)",
+        "category": "Routine"
+      },
+       {
+        "id": "wed17",
+        "startTime": "23:15",
+        "endTime": "23:45",
+        "description": "Quiet Reflection / Light Stretching",
+        "category": "Inner Mastery"
+      },
+      {
+        "id": "wed18",
+        "startTime": "23:45",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
-    "Thursday": [
+     "Thursday": [
       {
         "id": "thu01",
         "startTime": "06:00",
         "endTime": "06:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
         "id": "thu02",
         "startTime": "06:30",
         "endTime": "07:00",
-        "description": "Yoga Session",
+        "description": "Meditation",
         "category": "Inner Mastery"
       },
       {
         "id": "thu03",
         "startTime": "07:00",
         "endTime": "07:30",
-        "description": "Breakfast & Planning",
-        "category": "Routine"
+        "description": "Journaling & Emotional Regulation Practice",
+        "category": "Inner Mastery"
       },
       {
         "id": "thu04",
         "startTime": "07:30",
-        "endTime": "09:00",
-        "description": "Deep Work: Creative Problem Solving",
-        "category": "Outer Mastery"
+        "endTime": "08:30",
+        "description": "Breakfast, Get Ready for Office",
+        "category": "Routine"
       },
       {
         "id": "thu05",
-        "startTime": "09:00",
-        "endTime": "09:30",
-        "description": "Break - Mindfulness Practice",
-        "category": "Break"
+        "startTime": "08:30",
+        "endTime": "09:00",
+        "description": "Short Coding Review / Tech Learning (Podcast/Audio)",
+        "category": "Outer Mastery"
       },
       {
         "id": "thu06",
-        "startTime": "09:30",
-        "endTime": "11:30",
-        "description": "Project Development",
-        "category": "Work"
+        "startTime": "09:00",
+        "endTime": "09:30",
+        "description": "Commute to Office",
+        "category": "Routine"
       },
       {
         "id": "thu07",
-        "startTime": "11:30",
-        "endTime": "12:30",
-        "description": "Lunch & Short Walk",
-        "category": "Break"
+        "startTime": "09:30",
+        "endTime": "13:00",
+        "description": "Office Work Block 1",
+        "category": "Work"
       },
       {
         "id": "thu08",
-        "startTime": "12:30",
+        "startTime": "13:00",
         "endTime": "14:00",
-        "description": "Team Collaboration Session",
-        "category": "Work"
+        "description": "Lunch Break",
+        "category": "Break"
       },
       {
         "id": "thu09",
         "startTime": "14:00",
-        "endTime": "14:30",
-        "description": "Break - Quick Exercise",
-        "category": "Break"
-      },
-      {
-        "id": "thu10",
-        "startTime": "14:30",
-        "endTime": "16:30",
-        "description": "Focused Coding Session",
-        "category": "Work"
-      },
-      {
-        "id": "thu11",
-        "startTime": "16:30",
-        "endTime": "17:30",
-        "description": "Weekly Review & Planning",
-        "category": "Work"
-      },
-      {
-        "id": "thu12",
-        "startTime": "17:30",
         "endTime": "18:30",
-        "description": "Exercise: Swimming",
-        "category": "Outer Mastery"
+        "description": "Office Work Block 2",
+        "category": "Work"
       },
-      {
-        "id": "thu13",
+       {
+        "id": "thu10",
         "startTime": "18:30",
-        "endTime": "19:30",
-        "description": "Dinner Preparation & Eating",
+        "endTime": "19:00",
+        "description": "Commute Home",
         "category": "Routine"
       },
       {
+        "id": "thu11",
+        "startTime": "19:00",
+        "endTime": "19:45",
+        "description": "Arrive Home, Unwind, Prepare Dinner",
+        "category": "Routine"
+      },
+      {
+        "id": "thu12",
+        "startTime": "19:45",
+        "endTime": "20:30",
+        "description": "Dinner",
+        "category": "Routine"
+      },
+      {
+        "id": "thu13",
+        "startTime": "20:30",
+        "endTime": "21:45",
+        "description": "Focused Session: Coding Practice / Learning",
+        "category": "Outer Mastery"
+      },
+      {
         "id": "thu14",
-        "startTime": "19:30",
-        "endTime": "21:00",
-        "description": "Social: Virtual Meetup",
+        "startTime": "21:45",
+        "endTime": "22:15",
+        "description": "Light Connecting / Tech Reading",
         "category": "Outer Mastery"
       },
       {
         "id": "thu15",
-        "startTime": "21:00",
-        "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "startTime": "22:15",
+        "endTime": "22:45",
+        "description": "Prepare for Next Day, Tidy Up",
+        "category": "Routine"
+      },
+      {
+        "id": "thu16",
+        "startTime": "22:45",
+        "endTime": "23:15",
+        "description": "Wind-Down Routine: Reading (Non-Screen)",
+        "category": "Routine"
+      },
+       {
+        "id": "thu17",
+        "startTime": "23:15",
+        "endTime": "23:45",
+        "description": "Quiet Reflection / Light Stretching",
+        "category": "Inner Mastery"
+      },
+      {
+        "id": "thu18",
+        "startTime": "23:45",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
@@ -434,7 +510,7 @@
         "id": "fri01",
         "startTime": "06:00",
         "endTime": "06:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
@@ -448,94 +524,114 @@
         "id": "fri03",
         "startTime": "07:00",
         "endTime": "07:30",
-        "description": "Breakfast & Planning",
-        "category": "Routine"
+        "description": "Journaling & Emotional Regulation Practice",
+        "category": "Inner Mastery"
       },
       {
         "id": "fri04",
         "startTime": "07:30",
-        "endTime": "09:00",
-        "description": "Deep Work: Finishing Weekly Tasks",
-        "category": "Outer Mastery"
+        "endTime": "08:15",
+        "description": "Breakfast & Mindful Eating, Plan Work Day",
+        "category": "Routine"
       },
       {
         "id": "fri05",
-        "startTime": "09:00",
-        "endTime": "09:30",
-        "description": "Break - Walk Outside",
-        "category": "Break"
+        "startTime": "08:15",
+        "endTime": "09:15",
+        "description": "Deep Work: Coding (Learning/Fundamentals)",
+        "category": "Outer Mastery"
       },
       {
         "id": "fri06",
+        "startTime": "09:15",
+        "endTime": "09:30",
+        "description": "Transition: Break, Prepare for Work",
+        "category": "Break"
+      },
+      {
+        "id": "fri07",
         "startTime": "09:30",
-        "endTime": "11:00",
-        "description": "Team Retrospective",
+        "endTime": "13:00",
+        "description": "Office Work Block 1 (WFH)",
         "category": "Work"
       },
-      { "id": "fri07", "startTime": "11:00", "endTime": "12:30", "description": "Project Wrap-up", "category": "Work" },
       {
         "id": "fri08",
-        "startTime": "12:30",
-        "endTime": "13:30",
-        "description": "Lunch & Short Walk",
+        "startTime": "13:00",
+        "endTime": "14:00",
+        "description": "Lunch Break & Movement",
         "category": "Break"
       },
       {
         "id": "fri09",
-        "startTime": "13:30",
-        "endTime": "15:00",
-        "description": "Documentation & Knowledge Sharing",
+        "startTime": "14:00",
+        "endTime": "17:30",
+        "description": "Office Work Block 2 (WFH)",
         "category": "Work"
       },
       {
         "id": "fri10",
-        "startTime": "15:00",
-        "endTime": "15:30",
-        "description": "Break - Stretching",
-        "category": "Break"
-      },
-      {
-        "id": "fri11",
-        "startTime": "15:30",
-        "endTime": "17:00",
-        "description": "Weekly Review & Next Week Planning",
+        "startTime": "17:30",
+        "endTime": "19:00",
+        "description": "Office Work Wrap-up / Lighter Tasks / Emails",
         "category": "Work"
       },
       {
-        "id": "fri12",
-        "startTime": "17:00",
-        "endTime": "18:00",
-        "description": "Exercise: Yoga",
-        "category": "Inner Mastery"
-      },
-      {
-        "id": "fri13",
-        "startTime": "18:00",
-        "endTime": "19:00",
-        "description": "Dinner Preparation & Eating",
+        "id": "fri11",
+        "startTime": "19:00",
+        "endTime": "19:45",
+        "description": "Dinner & Unwind",
         "category": "Routine"
       },
       {
+        "id": "fri12",
+        "startTime": "19:45",
+        "endTime": "21:15",
+        "description": "Deep Work: Coding Projects / Portfolio",
+        "category": "Outer Mastery"
+      },
+      {
+        "id": "fri13",
+        "startTime": "21:15",
+        "endTime": "21:45",
+        "description": "Connecting with Developers / Networking",
+        "category": "Outer Mastery"
+      },
+      {
         "id": "fri14",
-        "startTime": "19:00",
-        "endTime": "21:00",
-        "description": "Relaxation: Movie Night",
-        "category": "Break"
+        "startTime": "21:45",
+        "endTime": "22:30",
+        "description": "Free Time / Hobby / Learning (Non-Coding)",
+        "category": "Wellbeing"
       },
       {
         "id": "fri15",
-        "startTime": "21:00",
-        "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "startTime": "22:30",
+        "endTime": "23:15",
+        "description": "Wind-Down Routine, Prepare for Next Day, Reading",
+        "category": "Routine"
+      },
+      {
+        "id": "fri16",
+        "startTime": "23:15",
+        "endTime": "23:45",
+        "description": "Quiet Reflection / Light Stretching",
+        "category": "Inner Mastery"
+      },
+      {
+        "id": "fri17",
+        "startTime": "23:45",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
     "Saturday": [
       {
         "id": "sat01",
-        "startTime": "07:00",
+        "startTime": "06:30",
         "endTime": "07:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
@@ -548,71 +644,92 @@
       {
         "id": "sat03",
         "startTime": "08:00",
-        "endTime": "09:00",
-        "description": "Breakfast & Weekend Planning",
-        "category": "Routine"
+        "endTime": "08:30",
+        "description": "Journaling & Emotional Regulation Practice (Reflect/Plan)",
+        "category": "Inner Mastery"
       },
       {
         "id": "sat04",
-        "startTime": "09:00",
-        "endTime": "10:30",
-        "description": "Exercise: Long Run or Hike",
-        "category": "Outer Mastery"
+        "startTime": "08:30",
+        "endTime": "09:30",
+        "description": "Breakfast, Plan the Day",
+        "category": "Routine"
       },
       {
         "id": "sat05",
-        "startTime": "10:30",
+        "startTime": "09:30",
         "endTime": "12:30",
-        "description": "Personal Project Work",
+        "description": "Deep Work: Major Project Development / Posting Related Tasks",
         "category": "Outer Mastery"
       },
       {
         "id": "sat06",
         "startTime": "12:30",
         "endTime": "13:30",
-        "description": "Lunch Preparation & Eating",
-        "category": "Routine"
+        "description": "Lunch Break",
+        "category": "Break"
       },
       {
         "id": "sat07",
         "startTime": "13:30",
         "endTime": "15:30",
-        "description": "Learning: New Skill or Hobby",
+        "description": "Skill Development / Connecting with Developers / Community",
         "category": "Outer Mastery"
       },
       {
         "id": "sat08",
         "startTime": "15:30",
-        "endTime": "16:00",
-        "description": "Break - Snack & Relaxation",
-        "category": "Break"
+        "endTime": "18:00",
+        "description": "Free Time / Social / Hobbies / Errands / Exercise",
+        "category": "Wellbeing"
       },
       {
         "id": "sat09",
-        "startTime": "16:00",
-        "endTime": "18:00",
-        "description": "Social Activity or Errands",
-        "category": "Outer Mastery"
+        "startTime": "18:00",
+        "endTime": "19:00",
+        "description": "Prepare Dinner / Relax",
+        "category": "Routine"
       },
       {
         "id": "sat10",
-        "startTime": "18:00",
-        "endTime": "19:30",
-        "description": "Dinner Preparation & Eating",
+        "startTime": "19:00",
+        "endTime": "20:00",
+        "description": "Dinner",
         "category": "Routine"
       },
       {
         "id": "sat11",
-        "startTime": "19:30",
+        "startTime": "20:00",
         "endTime": "21:30",
-        "description": "Relaxation: Reading or Movie",
-        "category": "Inner Mastery"
+        "description": "Flexible Slot: Light Coding / Reading / Relaxing Hobby",
+        "category": "Flexible"
       },
       {
         "id": "sat12",
         "startTime": "21:30",
         "endTime": "22:30",
-        "description": "Wind Down & Prepare for Sleep",
+        "description": "Wind-Down: Reading, Hobbies",
+        "category": "Routine"
+      },
+      {
+        "id": "sat13",
+        "startTime": "22:30",
+        "endTime": "23:00",
+        "description": "Plan for Sunday, Light Tidy",
+        "category": "Routine"
+      },
+       {
+        "id": "sat14",
+        "startTime": "23:00",
+        "endTime": "23:30",
+        "description": "Quiet Reflection",
+        "category": "Inner Mastery"
+      },
+       {
+        "id": "sat15",
+        "startTime": "23:30",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ],
@@ -620,90 +737,108 @@
       {
         "id": "sun01",
         "startTime": "07:00",
-        "endTime": "07:30",
-        "description": "Wake Up, Hydrate, Light Stretching",
+        "endTime": "08:00",
+        "description": "Wake Up, Hydrate, Light Stretching/Movement",
         "category": "Routine"
       },
       {
         "id": "sun02",
-        "startTime": "07:30",
+        "startTime": "08:00",
         "endTime": "08:30",
-        "description": "Extended Meditation & Mindfulness",
+        "description": "Meditation",
         "category": "Inner Mastery"
       },
       {
         "id": "sun03",
         "startTime": "08:30",
-        "endTime": "09:30",
-        "description": "Breakfast & Relaxation",
-        "category": "Routine"
+        "endTime": "09:00",
+        "description": "Journaling & Emotional Regulation Practice (Weekly Intention)",
+        "category": "Inner Mastery"
       },
       {
         "id": "sun04",
-        "startTime": "09:30",
-        "endTime": "11:00",
-        "description": "Nature Walk or Light Exercise",
-        "category": "Outer Mastery"
+        "startTime": "09:00",
+        "endTime": "10:00",
+        "description": "Breakfast, Plan the Day",
+        "category": "Routine"
       },
       {
         "id": "sun05",
-        "startTime": "11:00",
+        "startTime": "10:00",
         "endTime": "12:30",
-        "description": "Weekly Review & Reflection",
-        "category": "Inner Mastery"
+        "description": "Learning & Exploration Block (New Tech, Docs)",
+        "category": "Outer Mastery"
       },
       {
         "id": "sun06",
         "startTime": "12:30",
         "endTime": "13:30",
-        "description": "Lunch Preparation & Eating",
-        "category": "Routine"
+        "description": "Lunch Break",
+        "category": "Break"
       },
       {
         "id": "sun07",
         "startTime": "13:30",
-        "endTime": "15:30",
-        "description": "Creative Activity or Hobby",
-        "category": "Outer Mastery"
+        "endTime": "16:00",
+        "description": "Life Admin / Errands / Meal Prep / Social / Exercise",
+        "category": "Wellbeing"
       },
       {
         "id": "sun08",
-        "startTime": "15:30",
-        "endTime": "16:00",
-        "description": "Break - Snack & Relaxation",
-        "category": "Break"
+        "startTime": "16:00",
+        "endTime": "17:30",
+        "description": "Weekly Review & Planning Session",
+        "category": "Routine"
       },
       {
         "id": "sun09",
-        "startTime": "16:00",
-        "endTime": "18:00",
-        "description": "Week Ahead Planning & Preparation",
-        "category": "Inner Mastery"
+        "startTime": "17:30",
+        "endTime": "19:00",
+        "description": "Relax / Free Time / Prepare Dinner",
+        "category": "Routine"
       },
       {
         "id": "sun10",
-        "startTime": "18:00",
-        "endTime": "19:30",
-        "description": "Dinner Preparation & Eating",
+        "startTime": "19:00",
+        "endTime": "20:00",
+        "description": "Dinner",
         "category": "Routine"
       },
       {
         "id": "sun11",
-        "startTime": "19:30",
+        "startTime": "20:00",
         "endTime": "21:00",
-        "description": "Relaxation: Reading or Gentle Music",
-        "category": "Inner Mastery"
+        "description": "Light Coding / Review OR Relaxing Hobby",
+        "category": "Flexible"
       },
       {
         "id": "sun12",
         "startTime": "21:00",
         "endTime": "22:00",
-        "description": "Wind Down & Prepare for Sleep",
+        "description": "Wind-Down: Reading, Journal Reflection",
+        "category": "Routine"
+      },
+      {
+        "id": "sun13",
+        "startTime": "22:00",
+        "endTime": "22:30",
+        "description": "Prepare for Monday",
+        "category": "Routine"
+      },
+       {
+        "id": "sun14",
+        "startTime": "22:30",
+        "endTime": "23:00",
+        "description": "Quiet Reflection / Gentle Stretching",
+        "category": "Inner Mastery"
+      },
+       {
+        "id": "sun15",
+        "startTime": "23:00",
+        "endTime": "00:00",
+        "description": "Prepare for Sleep / Lights Out",
         "category": "Routine"
       }
     ]
-  },
-  "settings": {
-    "theme": "default"
   }
 }

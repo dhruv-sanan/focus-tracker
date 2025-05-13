@@ -82,7 +82,7 @@ export default function TaskList({ tasks, currentTime, completedTasks, onTaskCom
             id={isCurrent ? "current-task" : undefined}
             ref={isCurrent ? currentTaskRef : null}
             className={cn(
-              "p-3 sm:p-4 rounded-lg border transition-all",
+              "p-4 rounded-lg border transition-all",
               isCurrent
                 ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20"
                 : isPast

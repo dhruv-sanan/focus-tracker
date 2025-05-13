@@ -8,7 +8,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function getDayName(date: Date): string {
   const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-  return days[date.getDay() === 0 ? 6 : date.getDay() - 1] // Adjust to make Monday first day
+  return days[date.getDay() === 0 ? 6 : date.getDay()] // Adjust to make Monday first day
 }
 
 export function formatTime(timeString: string): string {
