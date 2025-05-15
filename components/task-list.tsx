@@ -80,9 +80,10 @@ export default function TaskList({ tasks, currentTime, completedTasks, onTaskCom
           <motion.div
             key={task.id}
             id={isCurrent ? "current-task" : undefined}
+            onClick={() => handleTaskComplete(task.id, !isCompleted)}
             ref={isCurrent ? currentTaskRef : null}
             className={cn(
-              "p-4 rounded-lg border transition-all",
+              "p-4 rounded-lg border transition-all cursor-pointer",
               isCurrent
                 ? "border-teal-500 bg-teal-50 dark:bg-teal-900/20"
                 : isPast
@@ -95,6 +96,7 @@ export default function TaskList({ tasks, currentTime, completedTasks, onTaskCom
             transition={{ duration: 0.3 }}
             whileHover={{ scale: 1.01 }}
           >
+
             <div className="flex items-start gap-3">
               <motion.button
                 onClick={() => handleTaskComplete(task.id, !isCompleted)}

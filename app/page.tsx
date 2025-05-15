@@ -47,52 +47,74 @@ export default function Home() {
     localStorage.setItem("completedTasks", JSON.stringify(completedTasks))
   }, [completedTasks])
 
-  // Check for task transitions and send notifications
-  useEffect(() => {
-    if (!notificationsEnabled) return
+  const [notifiedUpcomingTasks, setNotifiedUpcomingTasks] = useState<{ [taskId: string]: number }>({})
 
-    const today = getDayName(new Date())
-    const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
-    const currentTask = getCurrentTask(todayTasks, currentTime)
+useEffect(() => {
+  if (!notificationsEnabled) return
 
-    // If there's a current task and we haven't notified about it yet
-    if (currentTask && currentTask.id !== lastNotifiedTaskId) {
-      // Send notification for task start
-      new Notification("Task Started", {
-        body: `Time to start: ${currentTask.description}`,
+  const today = getDayName(new Date())
+  const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
+  const currentTask = getCurrentTask(todayTasks, currentTime)
+
+  // Handle task start notification
+  if (currentTask && currentTask.id !== lastNotifiedTaskId) {
+    new Notification("Task Started", {
+      body: `Time to start: ${currentTask.description}`,
+      icon: "/favicon.ico",
+    })
+
+    toast({
+      title: "Task Started",
+      description: currentTask.description,
+    })
+
+    setLastNotifiedTaskId(currentTask.id)
+  }
+
+  // Handle upcoming task notifications (2min & 1min before)
+  todayTasks.forEach((task) => {
+    const taskStartTime = parseTimeString(task.startTime)
+    const timeUntilStart = (taskStartTime.getTime() - currentTime.getTime()) / 1000 / 60 // in minutes
+
+    if (
+      timeUntilStart <= 2 && timeUntilStart > 1.99 &&
+      notifiedUpcomingTasks[task.id] !== 2
+    ) {
+      // Notify for 2-minute mark
+      new Notification("Upcoming Task", {
+        body: `In 2 minutes: ${task.description}`,
         icon: "/favicon.ico",
       })
 
-      setLastNotifiedTaskId(currentTask.id)
-
-      // Show toast notification as well
       toast({
-        title: "Task Started",
-        description: currentTask.description,
+        title: "Upcoming Task",
+        description: `In 2 minutes: ${task.description}`,
       })
+
+      setNotifiedUpcomingTasks((prev) => ({ ...prev, [task.id]: 2 }))
     }
 
-    // Check for upcoming tasks (within 2 minutes)
-    todayTasks.forEach((task) => {
-      const taskStartTime = parseTimeString(task.startTime)
-      const timeUntilStart = (taskStartTime.getTime() - currentTime.getTime()) / 1000 / 60 // minutes
+    if (
+      timeUntilStart <= 1 && timeUntilStart > 0.99 &&
+      notifiedUpcomingTasks[task.id] !== 1
+    ) {
+      // Notify for 1-minute mark
+      new Notification("Upcoming Task", {
+        body: `In 1 minute: ${task.description}`,
+        icon: "/favicon.ico",
+      })
 
-      // If task starts in 2 minutes or less but hasn't started yet
-      if (timeUntilStart <= 2 && timeUntilStart > 0) {
-        // Send notification for upcoming task
-        new Notification("Upcoming Task", {
-          body: `In ${Math.round(timeUntilStart)} minutes: ${task.description}`,
-          icon: "/favicon.ico",
-        })
+      toast({
+        title: "Upcoming Task",
+        description: `In 1 minute: ${task.description}`,
+      })
 
-        // Show toast notification as well
-        toast({
-          title: "Upcoming Task",
-          description: `In ${Math.round(timeUntilStart)} minutes: ${task.description}`,
-        })
-      }
-    })
-  }, [currentTime, notificationsEnabled, lastNotifiedTaskId, toast])
+      setNotifiedUpcomingTasks((prev) => ({ ...prev, [task.id]: 1 }))
+    }
+
+  })
+}, [currentTime, notificationsEnabled, lastNotifiedTaskId, toast, scheduleData.schedule, notifiedUpcomingTasks])
+  
 
   // Check at midnight if we need to reset tasks
   useEffect(() => {
@@ -177,7 +199,7 @@ export default function Home() {
         <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <Header />
           <div className="flex items-center gap-2">
-            <CurrentTimeDisplay currentTime={currentTime} />
+            <CurrentTimeDisplay />
             <NowButton onClick={handleNowClick} />
           </div>
         </div>

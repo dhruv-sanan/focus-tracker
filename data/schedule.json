@@ -274,13 +274,13 @@
       {
         "id": "wed04",
         "startTime": "07:30",
-        "endTime": "08:30",
+        "endTime": "08:42",
         "description": "Breakfast, Get Ready for Office",
         "category": "Routine"
       },
       {
         "id": "wed05",
-        "startTime": "08:30",
+        "startTime": "08:42",
         "endTime": "09:00",
         "description": "Short Coding Review / Tech Learning (Podcast/Audio)",
         "category": "Outer Mastery"
@@ -358,13 +358,13 @@
       {
         "id": "wed16",
         "startTime": "22:45",
-        "endTime": "23:15",
+        "endTime": "23:16",
         "description": "Wind-Down Routine: Reading (Non-Screen)",
         "category": "Routine"
       },
        {
         "id": "wed17",
-        "startTime": "23:15",
+        "startTime": "23:16",
         "endTime": "23:45",
         "description": "Quiet Reflection / Light Stretching",
         "category": "Inner Mastery"

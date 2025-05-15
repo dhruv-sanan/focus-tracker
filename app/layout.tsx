@@ -48,11 +48,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* Recommended to move icons to metadata object, but keeping for now if you have specific reasons */}
-        <link rel="apple-touch-icon" href="/favicon.png" />
-        <meta name="apple-mobile-web-app-capable" content="yes" /> {/* This is handled by metadata.appleWebApp.capable */}
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" /> {/* Handled by metadata.appleWebApp.statusBarStyle */}
-        {/* Consider removing the above meta tags if relying solely on the metadata object */}
+        <link rel="apple-touch-icon" href="/favicon.png"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/> 
+        <meta name="apple-mobile-web-app-status-bar-style" content="default"/>
       </head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

@@ -1,13 +1,23 @@
-import { formatTimeWithSeconds } from "@/lib/utils"
+// CurrentTimeDisplay.tsx
+"use client";
 
-interface CurrentTimeDisplayProps {
-  currentTime: Date
-}
+import { useEffect, useState } from "react";
 
-export default function CurrentTimeDisplay({ currentTime }: CurrentTimeDisplayProps) {
+export default function CurrentTimeDisplay() {
+  const [time, setTime] = useState<string>("");
+
+  useEffect(() => {
+    const update = () => setTime(new Date().toLocaleTimeString());
+    update();
+    const interval = setInterval(update, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  if (!time) return null; // don't show on server
+
   return (
-    <div className="text-lg font-mono bg-white dark:bg-gray-800 px-3 py-1 rounded-md shadow-sm border border-gray-200 dark:border-gray-700">
-      {formatTimeWithSeconds(currentTime)}
+    <div className="text-lg font-mono bg-white dark:bg-gray-800 px-3 py-1 rounded-md shadow">
+      {time}
     </div>
-  )
+  );
 }
