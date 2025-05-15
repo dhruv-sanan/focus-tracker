@@ -19,6 +19,21 @@ export default function Home() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false)
   const [lastNotifiedTaskId, setLastNotifiedTaskId] = useState<string | null>(null)
   const { toast } = useToast()
+  // Ensure service worker is registered
+  const registerServiceWorker = async () => {
+    if ('serviceWorker' in navigator) {
+      const registration = await navigator.serviceWorker.register('/service-worker.js');
+      return registration;
+    }
+    return null;
+  };
+  // Function to trigger notifications via service worker
+const showTaskNotification = async (title: string, body: string) => {
+  const registration = await registerServiceWorker();
+  if (registration) {
+    registration.showNotification(title, { body, icon: '/favicon.ico' });
+  }
+};
 
   // Initialize selected day and completed tasks from localStorage
   useEffect(() => {
@@ -58,10 +73,7 @@ useEffect(() => {
 
   // Handle task start notification
   if (currentTask && currentTask.id !== lastNotifiedTaskId) {
-    new Notification("Task Started", {
-      body: `Time to start: ${currentTask.description}`,
-      icon: "/favicon.ico",
-    })
+    showTaskNotification("Task Started", `Time to start: ${currentTask.description}`);
 
     toast({
       title: "Task Started",
@@ -81,10 +93,7 @@ useEffect(() => {
       notifiedUpcomingTasks[task.id] !== 2
     ) {
       // Notify for 2-minute mark
-      new Notification("Upcoming Task", {
-        body: `In 2 minutes: ${task.description}`,
-        icon: "/favicon.ico",
-      })
+      showTaskNotification("Upcoming Task", `In 2 minutes: ${task.description}`);
 
       toast({
         title: "Upcoming Task",
@@ -99,10 +108,7 @@ useEffect(() => {
       notifiedUpcomingTasks[task.id] !== 1
     ) {
       // Notify for 1-minute mark
-      new Notification("Upcoming Task", {
-        body: `In 1 minute: ${task.description}`,
-        icon: "/favicon.ico",
-      })
+      showTaskNotification("Upcoming Task", `In 1 minute: ${task.description}`);
 
       toast({
         title: "Upcoming Task",
