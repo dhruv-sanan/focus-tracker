@@ -22,18 +22,28 @@ export default function Home() {
   // Ensure service worker is registered
   const registerServiceWorker = async () => {
     if ('serviceWorker' in navigator) {
-      const registration = await navigator.serviceWorker.register('/service-worker.js');
+      const registration = await navigator.serviceWorker.register('/sw.js');
       return registration;
     }
     return null;
   };
   // Function to trigger notifications via service worker
-const showTaskNotification = async (title: string, body: string) => {
-  const registration = await registerServiceWorker();
-  if (registration) {
-    registration.showNotification(title, { body, icon: '/favicon.ico' });
-  }
-};
+  const showTaskNotification = async (title: string, body: string) => {
+    if ("serviceWorker" in navigator) {
+      // Make sure the service worker is registered.
+      await navigator.serviceWorker.register("/sw.js");
+      
+      // Wait until the registration is active.
+      const registration = await navigator.serviceWorker.ready;
+      
+      // Now it's safe to call showNotification.
+      registration.showNotification(title, {
+        body,
+        icon: "/favicon.ico",
+      });
+    }
+  };
+  
 
   // Initialize selected day and completed tasks from localStorage
   useEffect(() => {

@@ -29,7 +29,7 @@ export default function ThemePage() {
       return;
     }
   
-    // Request notification permission
+    // Request permission for notifications
     const permission = await Notification.requestPermission();
     if (permission !== "granted") {
       toast({
@@ -43,26 +43,21 @@ export default function ThemePage() {
     setNotificationsEnabled(true);
     localStorage.setItem("notificationsEnabled", "true");
   
+    // **Register the service worker**
     if ("serviceWorker" in navigator) {
-      // Register the service worker
-      await navigator.serviceWorker.register("/sw.js");
-  
-      // Wait until the service worker is active
-      const registration = await navigator.serviceWorker.ready;
-      
-      // Now trigger a test notification via the active service worker
-      registration.showNotification("Test Notification", {
-        body: "This is a test notification to verify setup.",
-        icon: "/favicon.ico",
-      });
-      
+      const registration = await navigator.serviceWorker.register("/sw.js");
       toast({
         title: "Notifications Enabled",
         description: "You'll receive notifications for task transitions.",
       });
+  
+      // **Trigger test notification via Service Worker**
+      registration.showNotification("Test Notification", {
+        body: "This is a test notification to verify setup.",
+        icon: "/favicon.ico",
+      });
     }
   };
-  
   // **Handle disabling notifications**  
   const handleDisableNotifications = async () => {
     setNotificationsEnabled(false);
