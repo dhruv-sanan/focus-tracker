@@ -25,44 +25,55 @@ export default function ThemePage() {
         title: "Notifications Not Supported",
         description: "Your browser doesn't support notifications.",
         variant: "destructive",
-      })
-      return
+      });
+      return;
     }
   
-    if (Notification.permission === "granted") {
-      setNotificationsEnabled(true)
-      localStorage.setItem("notificationsEnabled", "true")
-      toast({
-        title: "Notifications Enabled",
-        description: "You'll receive notifications for task transitions.",
-      })
-    } else if (Notification.permission !== "denied") {
-      const permission = await Notification.requestPermission()
-      if (permission === "granted") {
-        setNotificationsEnabled(true)
-        localStorage.setItem("notificationsEnabled", "true")
-        toast({
-          title: "Notifications Enabled",
-          description: "You'll receive notifications for task transitions.",
-        })
-      }
-    } else {
+    // Request permission for notifications
+    const permission = await Notification.requestPermission();
+    if (permission !== "granted") {
       toast({
         title: "Notifications Blocked",
         description: "Please enable notifications in your browser settings.",
         variant: "destructive",
-      })
+      });
+      return;
     }
-  }
   
-  const handleDisableNotifications = () => {
-    setNotificationsEnabled(false)
-    localStorage.setItem("notificationsEnabled", "false")
+    setNotificationsEnabled(true);
+    localStorage.setItem("notificationsEnabled", "true");
+  
+    // **Register the service worker**
+    if ("serviceWorker" in navigator) {
+      const registration = await navigator.serviceWorker.register("/sw.js");
+      toast({
+        title: "Notifications Enabled",
+        description: "You'll receive notifications for task transitions.",
+      });
+  
+      // **Trigger test notification via Service Worker**
+      registration.showNotification("Test Notification", {
+        body: "This is a test notification to verify setup.",
+        icon: "/favicon.ico",
+      });
+    }
+  };
+  // **Handle disabling notifications**  
+  const handleDisableNotifications = async () => {
+    setNotificationsEnabled(false);
+    localStorage.setItem("notificationsEnabled", "false");
+  
+    if ("serviceWorker" in navigator) {
+      const registrations = await navigator.serviceWorker.getRegistrations();
+      registrations.forEach((registration) => registration.unregister());
+    }
+  
     toast({
       title: "Notifications Disabled",
       description: "You won't receive notifications for task transitions.",
-    })
-  }
+    });
+  };
+  
   const handleResetToday = () => {
     const today = getDayName(new Date())
     const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []

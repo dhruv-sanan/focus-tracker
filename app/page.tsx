@@ -20,21 +20,48 @@ export default function Home() {
   const [lastNotifiedTaskId, setLastNotifiedTaskId] = useState<string | null>(null)
   const { toast } = useToast()
 
+  // --- SERVICE WORKER REGISTRATION ---
+  useEffect(() => {
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((reg) => {
+          console.log("Service Worker registered:", reg)
+          return navigator.serviceWorker.ready
+        })
+        .then((readyReg) => {
+          console.log("Service Worker active:", readyReg)
+        })
+        .catch((err) => {
+          console.error("SW registration failed:", err)
+        })
+    }
+  }, [])
+
+  // Function to trigger notifications via service worker
+  const showTaskNotification = async (title: string, body: string) => {
+    if ("serviceWorker" in navigator) {
+      const registration = await navigator.serviceWorker.ready
+      registration.showNotification(title, {
+        body,
+        icon: "/favicon.ico",
+      })
+    }
+  }
+
   // Initialize selected day and completed tasks from localStorage
   useEffect(() => {
     const today = getDayName(new Date())
     setSelectedDay(today)
 
-    const savedCompletedTasks = localStorage.getItem("completedTasks")
-    if (savedCompletedTasks) {
-      setCompletedTasks(JSON.parse(savedCompletedTasks))
+    const saved = localStorage.getItem("completedTasks")
+    if (saved) {
+      setCompletedTasks(JSON.parse(saved))
     }
 
-    // Check if notifications were previously enabled
     const notifEnabled = localStorage.getItem("notificationsEnabled") === "true"
     setNotificationsEnabled(notifEnabled)
 
-    // Update current time every second for more accurate notifications
     const interval = setInterval(() => {
       setCurrentTime(new Date())
     }, 1000)
@@ -49,107 +76,65 @@ export default function Home() {
 
   const [notifiedUpcomingTasks, setNotifiedUpcomingTasks] = useState<{ [taskId: string]: number }>({})
 
-useEffect(() => {
-  if (!notificationsEnabled) return
-
-  const today = getDayName(new Date())
-  const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
-  const currentTask = getCurrentTask(todayTasks, currentTime)
-
-  // Handle task start notification
-  if (currentTask && currentTask.id !== lastNotifiedTaskId) {
-    new Notification("Task Started", {
-      body: `Time to start: ${currentTask.description}`,
-      icon: "/favicon.ico",
-    })
-
-    toast({
-      title: "Task Started",
-      description: currentTask.description,
-    })
-
-    setLastNotifiedTaskId(currentTask.id)
-  }
-
-  // Handle upcoming task notifications (2min & 1min before)
-  todayTasks.forEach((task) => {
-    const taskStartTime = parseTimeString(task.startTime)
-    const timeUntilStart = (taskStartTime.getTime() - currentTime.getTime()) / 1000 / 60 // in minutes
-
-    if (
-      timeUntilStart <= 2 && timeUntilStart > 1.99 &&
-      notifiedUpcomingTasks[task.id] !== 2
-    ) {
-      // Notify for 2-minute mark
-      new Notification("Upcoming Task", {
-        body: `In 2 minutes: ${task.description}`,
-        icon: "/favicon.ico",
-      })
-
-      toast({
-        title: "Upcoming Task",
-        description: `In 2 minutes: ${task.description}`,
-      })
-
-      setNotifiedUpcomingTasks((prev) => ({ ...prev, [task.id]: 2 }))
-    }
-
-    if (
-      timeUntilStart <= 1 && timeUntilStart > 0.99 &&
-      notifiedUpcomingTasks[task.id] !== 1
-    ) {
-      // Notify for 1-minute mark
-      new Notification("Upcoming Task", {
-        body: `In 1 minute: ${task.description}`,
-        icon: "/favicon.ico",
-      })
-
-      toast({
-        title: "Upcoming Task",
-        description: `In 1 minute: ${task.description}`,
-      })
-
-      setNotifiedUpcomingTasks((prev) => ({ ...prev, [task.id]: 1 }))
-    }
-
-  })
-}, [currentTime, notificationsEnabled, lastNotifiedTaskId, toast, scheduleData.schedule, notifiedUpcomingTasks])
-  
-
-  // Check at midnight if we need to reset tasks
+  // Notification logic
   useEffect(() => {
-    const checkForReset = () => {
+    if (!notificationsEnabled) return
+
+    const today = getDayName(new Date())
+    const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
+    const currentTask = getCurrentTask(todayTasks, currentTime)
+
+    if (currentTask && currentTask.id !== lastNotifiedTaskId) {
+      showTaskNotification("Task Started", `Time to start: ${currentTask.description}`)
+      toast({ title: "Task Started", description: currentTask.description })
+      setLastNotifiedTaskId(currentTask.id)
+    }
+
+    todayTasks.forEach((task) => {
+      const taskStartTime = parseTimeString(task.startTime)
+      const minsAway = (taskStartTime.getTime() - currentTime.getTime()) / 1000 / 60
+
+      if (minsAway <= 2 && minsAway > 1.99 && notifiedUpcomingTasks[task.id] !== 2) {
+        showTaskNotification("Upcoming Task", `In 2 minutes: ${task.description}`)
+        toast({ title: "Upcoming Task", description: `In 2 minutes: ${task.description}` })
+        setNotifiedUpcomingTasks((p) => ({ ...p, [task.id]: 2 }))
+      }
+
+      if (minsAway <= 1 && minsAway > 0.99 && notifiedUpcomingTasks[task.id] !== 1) {
+        showTaskNotification("Upcoming Task", `In 1 minute: ${task.description}`)
+        toast({ title: "Upcoming Task", description: `In 1 minute: ${task.description}` })
+        setNotifiedUpcomingTasks((p) => ({ ...p, [task.id]: 1 }))
+      }
+    })
+  }, [currentTime, notificationsEnabled, lastNotifiedTaskId, toast, notifiedUpcomingTasks])
+
+  // Midnight reset logic
+  useEffect(() => {
+    const checkReset = () => {
       const now = new Date()
       if (now.getHours() === 0 && now.getMinutes() === 0) {
-        // It's midnight, archive yesterday's tasks and reset
         const yesterday = new Date(now)
         yesterday.setDate(yesterday.getDate() - 1)
-        const yesterdayName = getDayName(yesterday)
+        const yName = getDayName(yesterday)
+        const archived = JSON.parse(localStorage.getItem("archivedTasks") || "{}")
+        const yTasks = scheduleData.schedule[yName as keyof typeof scheduleData.schedule] || []
 
-        // Archive completed tasks for yesterday
-        const archivedTasks = JSON.parse(localStorage.getItem("archivedTasks") || "{}")
-        const yesterdayTasks = scheduleData.schedule[yesterdayName as keyof typeof scheduleData.schedule] || []
-
-        const yesterdayCompleted: Record<string, boolean> = {}
-        yesterdayTasks.forEach((task) => {
-          if (completedTasks[task.id]) {
-            yesterdayCompleted[task.id] = true
+        const yCompleted: Record<string, boolean> = {}
+        yTasks.forEach((t) => {
+          if (completedTasks[t.id]) {
+            yCompleted[t.id] = true
           }
         })
 
-        archivedTasks[yesterday.toISOString().split("T")[0]] = yesterdayCompleted
-        localStorage.setItem("archivedTasks", JSON.stringify(archivedTasks))
+        archived[yesterday.toISOString().split("T")[0]] = yCompleted
+        localStorage.setItem("archivedTasks", JSON.stringify(archived))
 
-        // Reset today's tasks
         const today = getDayName(now)
-        const todayTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
+        const tTasks = scheduleData.schedule[today as keyof typeof scheduleData.schedule] || []
+        const newCompleted = { ...completedTasks }
+        tTasks.forEach((t) => delete newCompleted[t.id])
 
-        const newCompletedTasks = { ...completedTasks }
-        todayTasks.forEach((task) => {
-          delete newCompletedTasks[task.id]
-        })
-
-        setCompletedTasks(newCompletedTasks)
+        setCompletedTasks(newCompleted)
         toast({
           title: "New Day Started",
           description: "Yesterday's tasks have been archived and today's tasks reset.",
@@ -157,41 +142,24 @@ useEffect(() => {
       }
     }
 
-    // Check every minute
-    const interval = setInterval(checkForReset, 60000)
+    const interval = setInterval(checkReset, 60000)
     return () => clearInterval(interval)
   }, [completedTasks, toast])
 
-  const handleDayChange = (day: string) => {
-    setSelectedDay(day)
-  }
-
+  // Handlers and rendering logic unchanged...
+  const handleDayChange = (day: string) => setSelectedDay(day)
   const handleNowClick = () => {
-    const today = getDayName(new Date())
-    setSelectedDay(today)
+    setSelectedDay(getDayName(new Date()))
     setCurrentTime(new Date())
-
-    // Scroll to current task (implementation in TaskList component)
-    const currentTaskElement = document.getElementById("current-task")
-    if (currentTaskElement) {
-      currentTaskElement.scrollIntoView({ behavior: "smooth", block: "center" })
-    }
+    const el = document.getElementById("current-task")
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" })
   }
-
-  const handleTaskCompletion = (taskId: string, completed: boolean) => {
-    setCompletedTasks((prev) => ({
-      ...prev,
-      [taskId]: completed,
-    }))
-  }
+  const handleTaskCompletion = (id: string, done: boolean) =>
+    setCompletedTasks((p) => ({ ...p, [id]: done }))
 
   const dayTasks = scheduleData.schedule[selectedDay as keyof typeof scheduleData.schedule] || []
-  const currentTask = getCurrentTask(dayTasks, currentTime)
-
-  // Calculate completion percentage for the selected day
-  const totalTasks = dayTasks.length
-  const completedTasksCount = dayTasks.filter((task) => completedTasks[task.id]).length
-  const completionPercentage = totalTasks > 0 ? (completedTasksCount / totalTasks) * 100 : 0
+  const completedCount = dayTasks.filter((t) => completedTasks[t.id]).length
+  const pct = dayTasks.length ? (completedCount / dayTasks.length) * 100 : 0
 
   return (
     <main className="min-h-screen p-4 md:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900">
@@ -209,13 +177,13 @@ useEffect(() => {
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <div className="text-sm text-gray-600 dark:text-gray-400">
-              {completedTasksCount} of {totalTasks} tasks completed
+              {completedCount} of {dayTasks.length} tasks completed
             </div>
             <div className="w-32 h-2 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
               <div
                 className="h-full bg-teal-500 rounded-full transition-all duration-500 ease-out"
-                style={{ width: `${completionPercentage}%` }}
-              ></div>
+                style={{ width: `${pct}%` }}
+              />
             </div>
           </div>
         </div>
