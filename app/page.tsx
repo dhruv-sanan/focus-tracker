@@ -9,8 +9,10 @@ import Header from "@/components/header"
 import { getDayName, getCurrentTask, parseTimeString } from "@/lib/utils"
 import scheduleData from "@/data/schedule.json"
 import { Button } from "@/components/ui/button"
-import { Trash2, Bell, BellOff } from "lucide-react"
+import { Trash2, Bell, BellOff, Link } from "lucide-react"
 import { useToast } from "@/components/ui/use-toast"
+import { PenToolIcon as Tool } from "lucide-react"
+import PomodoroTimer from "@/components/pomodoro-timer"
 
 export default function Home() {
   const [selectedDay, setSelectedDay] = useState("")
@@ -19,6 +21,8 @@ export default function Home() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(false)
   const [lastNotifiedTaskId, setLastNotifiedTaskId] = useState<string | null>(null)
   const { toast } = useToast()
+  const [showTimer, setShowTimer] = useState(false)
+
 
   // --- SERVICE WORKER REGISTRATION ---
   useEffect(() => {
@@ -162,17 +166,15 @@ export default function Home() {
   const pct = dayTasks.length ? (completedCount / dayTasks.length) * 100 : 0
 
   return (
-    <main className="min-h-screen p-4 md:p-6 lg:p-8 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-          <Header />
-          <div className="flex items-center gap-2">
-            <CurrentTimeDisplay />
-            <NowButton onClick={handleNowClick} />
-          </div>
+    <div className="min-h-screen p-4 md:p-6">
+      <header className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold">MyFocusDash</h1>
+        <div className="text-xl font-mono text-muted-foreground">
+          <NowButton onClick={handleNowClick} />
+          <CurrentTimeDisplay />
         </div>
-
-        <DaySelector selectedDay={selectedDay} onDayChange={handleDayChange} />
+      </header>      
+      <DaySelector selectedDay={selectedDay} onDayChange={handleDayChange} />
 
         <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -196,7 +198,7 @@ export default function Home() {
             onTaskCompletion={handleTaskCompletion}
           />
         </div>
-      </div>
-    </main>
+
+    </div>
   )
 }
