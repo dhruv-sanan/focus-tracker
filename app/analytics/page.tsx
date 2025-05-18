@@ -7,6 +7,7 @@ import Link from "next/link"
 import scheduleData from "@/data/schedule.json"
 import { getDayName } from "@/lib/utils"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import CurrentTimeDisplay from "@/components/current-time-display"
 
 export default function SummaryPage() {
   const [completedTasks, setCompletedTasks] = useState<Record<string, boolean>>({})
@@ -172,7 +173,9 @@ export default function SummaryPage() {
             </Button>
           </Link>
           <h1 className="text-xl md:text-3xl font-bold text-gray-800 dark:text-gray-100">Weekly Summary</h1>
+          
         </div>
+        <CurrentTimeDisplay />
 
         <div className="space-y-4 md:space-y-6">
           {/* Today's Progress */}

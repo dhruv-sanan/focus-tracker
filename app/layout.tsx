@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/toaster"
 import PWAInstallPrompt from "@/components/pwa-install-prompt"
 import Sidebar from "@/components/Sidebar"
+import { PomodoroProvider } from "@/contexts/pomodoro-context"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} bg-background text-foreground`}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <PomodoroProvider>
         <div className="flex">
             {/* Fixed Sidebar */}
             <div className="fixed top-0 left-0 h-screen w-16 border-r border-border flex flex-col justify-between py-6 z-50 bg-background">
@@ -65,6 +67,7 @@ export default function RootLayout({
           {/* Global components */}
           <Toaster />
           <PWAInstallPrompt />
+          </PomodoroProvider>
         </ThemeProvider>
       </body>
     </html>

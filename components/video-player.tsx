@@ -1,7 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { Loader2 } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 
 interface VideoPlayerProps {
   videoUrl: string
@@ -9,37 +8,43 @@ interface VideoPlayerProps {
 
 export default function VideoPlayer({ videoUrl }: VideoPlayerProps) {
   const [isLoading, setIsLoading] = useState(true)
-  const [embedUrl, setEmbedUrl] = useState("")
+  const iframeRef = useRef<HTMLIFrameElement>(null)
 
   useEffect(() => {
-    // Convert YouTube URLs to embed format if needed
-    if (videoUrl.includes("youtube.com/watch?v=")) {
-      const videoId = new URL(videoUrl).searchParams.get("v")
-      setEmbedUrl(`https://www.youtube.com/embed/${videoId}`)
-    } else if (videoUrl.includes("youtu.be/")) {
-      const videoId = videoUrl.split("youtu.be/")[1].split("?")[0]
-      setEmbedUrl(`https://www.youtube.com/embed/${videoId}`)
-    } else {
-      setEmbedUrl(videoUrl)
+    setIsLoading(true)
+
+    const handleIframeLoad = () => {
+      setIsLoading(false)
+    }
+
+    const iframe = iframeRef.current
+    if (iframe) {
+      iframe.addEventListener("load", handleIframeLoad)
+    }
+
+    return () => {
+      if (iframe) {
+        iframe.removeEventListener("load", handleIframeLoad)
+      }
     }
   }, [videoUrl])
 
   return (
-    <div className="relative aspect-video w-full bg-black/20 rounded-lg overflow-hidden">
+    <div className="relative w-full h-full">
       {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-emerald-500" />
+        <div className="absolute inset-0 flex items-center justify-center bg-muted">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
         </div>
       )}
-
       <iframe
-        src={`${embedUrl}?autoplay=0&rel=0`}
-        title="Video player"
-        className="w-full h-full"
+        ref={iframeRef}
+        src={videoUrl}
+        className="w-full h-full aspect-video"
+        title="Video Player"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-        onLoad={() => setIsLoading(false)}
-      />
+      ></iframe>
     </div>
   )
 }
