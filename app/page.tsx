@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import DaySelector from "@/components/day-selector"
 import TaskList from "@/components/task-list"
 import CurrentTimeDisplay from "@/components/current-time-display"
@@ -18,10 +18,23 @@ export default function Home() {
   const [lastNotifiedTaskId, setLastNotifiedTaskId] = useState<string | null>(null)
   const { toast } = useToast()
   const [showTimer, setShowTimer] = useState(false) // Assuming this state is used elsewhere
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  
+    useEffect(() => {
+      audioRef.current = new Audio("/notification.mp3")
+    }, [])
 
   // Initialize notifiedUpcomingTasks from localStorage or empty object
   const [notifiedUpcomingTasks, setNotifiedUpcomingTasks] = useState<{ [taskId: string]: number }>({})
-
+  
+  useEffect(() => {
+    if ("Notification" in window && Notification.permission === "default") {
+      Notification.requestPermission().then((perm) => {
+        console.log("Notification permission:", perm);
+      });
+    }
+  }, []);
+  
 
   // --- SERVICE WORKER REGISTRATION ---
   useEffect(() => {
@@ -43,17 +56,28 @@ export default function Home() {
 
   const showTaskNotification = async (title: string, body: string) => {
     if ("serviceWorker" in navigator) {
-      try {
-        const registration = await navigator.serviceWorker.ready
-        registration.showNotification(title, {
-          body,
-          icon: "/favicon.ico", // Ensure this path is correct from the service worker's perspective
+      // OLD: await navigator.serviceWorker.register("/sw.js");
+      // NEW: wait until there's an active controller
+      const registration = await navigator.serviceWorker.ready;
+  
+      // show the system notification
+      registration.showNotification(title, {
+        body,
+        icon: "/favicon.ico",
+      });
+  
+      // play a sound for the user
+      const audio = audioRef.current
+      if (audio) {
+        audio.pause()
+        audio.currentTime = 0
+        audio.play().catch((err) => {
+          console.warn("Audio play failed:", err)
         })
-      } catch (error) {
-        console.error("Error showing notification:", error)
       }
     }
-  }
+  };
+  
 
   // Initialize states from localStorage and set up current time interval
   useEffect(() => {
@@ -138,6 +162,7 @@ export default function Home() {
     todayTasks.forEach((task) => {
       const taskStartTime = parseTimeString(task.startTime) // Ensure this function correctly parses time for today
       const nowTime = currentTime.getTime()
+      
       const taskTime = new Date(nowTime) // Create a new date object for task time calculation
 
       // Set hours and minutes for taskTime based on task.startTime
@@ -160,7 +185,6 @@ export default function Home() {
       }
     })
   }, [currentTime, notificationsEnabled, lastNotifiedTaskId, toast, notifiedUpcomingTasks, showTaskNotification]) // Added showTaskNotification to deps
-  
   // Midnight reset logic
   useEffect(() => {
     const checkReset = () => {
@@ -226,17 +250,24 @@ export default function Home() {
 
   const handleNowClick = () => {
     const newCurrentTime = new Date();
-    setSelectedDay(getDayName(newCurrentTime))
-    setCurrentTime(newCurrentTime) // Ensure currentTime is updated before scroll attempt
-    // Adding a slight delay for DOM to update if `selectedDay` change causes TaskList to re-render
-    // and the "current-task" ID might need a moment to be in the DOM.
+    console.log("New current time:", newCurrentTime);
+  
+    const dayName = getDayName(newCurrentTime);
+    console.log("Day name from new current time:", dayName);
+  
+    setSelectedDay(dayName);
+    setCurrentTime(newCurrentTime);
+  
     setTimeout(() => {
-        const el = document.getElementById("current-task")
-        if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "center" })
-        }
+      const el = document.getElementById("current-task");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+      } else {
+        console.log("current-task element not found");
+      }
     }, 0);
-  }
+  };
+  
 
   const handleTaskCompletion = (id: string, done: boolean) =>
     setCompletedTasks((p) => ({ ...p, [id]: done }))

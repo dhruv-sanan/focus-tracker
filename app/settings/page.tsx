@@ -45,16 +45,27 @@ export default function ThemePage() {
   
     // **Register the service worker**
     if ("serviceWorker" in navigator) {
-      const registration = await navigator.serviceWorker.register("/sw.js");
+      // 1) register your SW (if not already)
+      await navigator.serviceWorker.register("/sw.js");
+
+      // 2) wait until it's fully active & controlling this page
+      const registration = await navigator.serviceWorker.ready;
+
       toast({
         title: "Notifications Enabled",
         description: "You'll receive notifications for task transitions.",
       });
   
-      // **Trigger test notification via Service Worker**
+      // **Trigger test notification via the active SW**
       registration.showNotification("Test Notification", {
         body: "This is a test notification to verify setup.",
         icon: "/favicon.ico",
+      });
+
+      // **Play a sound cue**
+      const audio = new Audio("/notification.mp3");
+      audio.play().catch(() => {
+        console.warn("Unable to play notification sound");
       });
     }
   };
