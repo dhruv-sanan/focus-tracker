@@ -244,6 +244,14 @@ const getDefaultCategories = (): VideoCategory[] => [
         isRecommended: true,
         thumbnail: "", // Will be populated
       },
+      {
+        id: "study-3",
+        title: "2-HOUR STUDY WITH ME",
+        description: "Pomodoro timer 2x50 | Deep Focus | Lofi",
+        videoUrl: "https://www.youtube.com/watch?v=QebXHPY7sac", // Example YouTube URL
+        duration: "2:00:00",
+        thumbnail: "", // Will be populated
+      },
     ],
   },
 ]
