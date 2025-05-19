@@ -282,11 +282,11 @@ export default function Home() {
       <header className="flex items-center justify-between mb-6 md:mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400">MyFocusDash</h1>
         <div className="flex items-center gap-4 text-lg font-mono text-gray-500 dark:text-gray-400">
-          <NowButton onClick={handleNowClick} />
           <TodoPopup />
           <CurrentTimeDisplay />
         </div>
       </header>      
+      <NowButton onClick={handleNowClick} />
       
       <DaySelector selectedDay={selectedDay} onDayChange={handleDayChange} />
 

@@ -132,7 +132,7 @@ export default function TodoPopup() {
           >
             <div className="flex justify-between items-center p-4 border-b">
               <div className="flex items-center gap-2">
-                <span className="text-xl font-semibold">Pending Tasks</span>
+                <span className="text-lg md:text-xl font-semibold">Pending Tasks</span>
                 <Badge variant="outline">{incompleteTasks.length}</Badge>
               </div>
               <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)} aria-label="Close">
@@ -144,9 +144,9 @@ export default function TodoPopup() {
               style={{ maxHeight: "calc(5 * 64px)" }} // Approximate height for 5 tasks
             >
               {incompleteTasks.length === 0 ? (
-                <div className="text-center text-muted-foreground py-8">
+                <div className="text-center text-muted-foreground py-8 text-sm md:text-base">
                   <p>All tasks completed! 🎉</p>
-                  <p className="text-sm mt-2">To add more tasks, go to Journal &gt; Tasks</p>
+                  <p className="text-xs md:text-sm mt-2">To add more tasks, go to Journal &gt; Tasks</p>
                 </div>
               ) : (
                 <ul className="space-y-3 p-4">
@@ -165,10 +165,11 @@ export default function TodoPopup() {
                         aria-label="Mark task as done"
                       />
                       <div className="flex-1">
-                        <p className="font-medium">{task.text}</p>
-                        <p className="text-xs text-muted-foreground">
-                          {format(new Date(task.entryDate), "MMM d, yyyy")}
+                      <p className="font-medium text-sm md:text-base">{task.text}</p>
+                        <p className="text-xs md:text-sm text-muted-foreground">
+                        {format(new Date(task.entryDate), "MMM d, yyyy")}
                         </p>
+
                       </div>
                     </li>
                   ))}
