@@ -18,16 +18,12 @@ interface TaskListProps {
 export default function TaskList({ tasks, currentTime, completedTasks, onTaskCompletion }: TaskListProps) {
   const currentTaskRef = useRef<HTMLDivElement>(null)
   const isMobile = useMediaQuery("(max-width: 640px)")
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
-  // Scroll to current task on initial render and when tasks change
   useEffect(() => {
-    if (currentTaskRef.current) {
-      currentTaskRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "center",
-      })
-    }
-  }, [tasks])
+    audioRef.current = new Audio("/task-completed.mp3")
+  }, [])
+
 
   const handleTaskComplete = (taskId: string, completed: boolean) => {
     onTaskCompletion(taskId, completed)
@@ -43,7 +39,15 @@ export default function TaskList({ tasks, currentTime, completedTasks, onTaskCom
       canvas.style.pointerEvents = "none"
       canvas.style.zIndex = "1000"
       document.body.appendChild(canvas)
-
+      
+      const audio = audioRef.current
+      if (audio) {
+        audio.pause()
+        audio.currentTime = 0
+        audio.play().catch((err) => {
+          console.warn("Audio play failed:", err)
+        })
+      }
       const myConfetti = confetti.create(canvas, {
         resize: true,
         useWorker: true,
