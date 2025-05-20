@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { Badge } from "@/components/ui/badge"
 import { X } from "lucide-react"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./ui/tooltip"
 
 interface Task {
   id: string
@@ -101,14 +102,24 @@ export default function TodoPopup() {
 
   return (
     <div className="relative">
-      <Button
-        ref={buttonRef}
-        className="rounded-full h-14 w-14 shadow-lg text-2xl flex items-center justify-center"
-        onClick={() => setIsOpen(!isOpen)}
-        aria-label="Show all todos"
-      >
-        📋
-      </Button>
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger>
+                <Button
+                    ref={buttonRef}
+                    className="rounded-full h-14 w-14 shadow-lg text-2xl flex items-center justify-center"
+                    onClick={() => setIsOpen(!isOpen)}
+                    aria-label="Show all todos"
+                >
+                    📋
+                </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                <p>Incomplete tasks</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
+      
 
       {isOpen && (
         <div className="fixed inset-0 z-50" style={{ pointerEvents: "none" }}>
