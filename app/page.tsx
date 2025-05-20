@@ -8,6 +8,7 @@ import NowButton from "@/components/now-button"
 import { getDayName, getCurrentTask, parseTimeString } from "@/lib/utils"
 import scheduleData from "@/data/schedule.json"
 import { useToast } from "@/components/ui/use-toast"
+import TodoPopup from "@/components/to-do-list"
 
 export default function Home() {
   const [selectedDay, setSelectedDay] = useState("")
@@ -280,11 +281,12 @@ export default function Home() {
     <div className="min-h-screen bg-gray-50 dark:bg-gray-900 p-4 md:p-6 text-gray-900 dark:text-gray-100">
       <header className="flex items-center justify-between mb-6 md:mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-teal-600 dark:text-teal-400">MyFocusDash</h1>
-        <div className="flex items-center gap-3 text-lg font-mono text-gray-500 dark:text-gray-400">
-          <NowButton onClick={handleNowClick} />
+        <div className="flex items-center gap-4 text-lg font-mono text-gray-500 dark:text-gray-400">
+          <TodoPopup />
           <CurrentTimeDisplay />
         </div>
       </header>      
+      <NowButton onClick={handleNowClick} />
       
       <DaySelector selectedDay={selectedDay} onDayChange={handleDayChange} />
 

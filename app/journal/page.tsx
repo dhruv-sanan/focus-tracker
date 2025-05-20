@@ -146,6 +146,14 @@ export default function JournalPage() {
       console.error("Error adding task:", error)
     }
   }
+  useEffect(() => {
+    const autosave = setTimeout(() => {
+      if (currentEntry) saveEntry();
+    }, 1000);
+  
+    return () => clearTimeout(autosave);
+  }, [currentEntry]);
+  
 
   const handleToggleTask = (taskId: string) => {
     if (!currentEntry) return
@@ -251,10 +259,6 @@ export default function JournalPage() {
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
-          <Button onClick={saveEntry} className="bg-primary hover:bg-primary/90">
-            <Save className="h-4 w-4 mr-2" />
-            Save Entry
-          </Button>
         </div>
 
         {currentEntry && (

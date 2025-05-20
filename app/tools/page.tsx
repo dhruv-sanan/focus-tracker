@@ -37,7 +37,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { toast } from "@/components/ui/use-toast"
 import {
   AlertDialog,
@@ -242,6 +241,14 @@ const getDefaultCategories = (): VideoCategory[] => [
         videoUrl: "https://www.youtube.com/embed/ZMsTMuyH7w8", // Example YouTube URL
         duration: "2:51:43",
         isRecommended: true,
+        thumbnail: "", // Will be populated
+      },
+      {
+        id: "study-3",
+        title: "2-HOUR STUDY WITH ME",
+        description: "Pomodoro timer 2x50 | Deep Focus | Lofi",
+        videoUrl: "https://www.youtube.com/watch?v=QebXHPY7sac", // Example YouTube URL
+        duration: "2:00:00",
         thumbnail: "", // Will be populated
       },
     ],
