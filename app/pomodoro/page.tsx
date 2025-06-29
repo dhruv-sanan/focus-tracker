@@ -9,6 +9,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Play, Pause, SkipForward, RefreshCw, Coffee, Timer, SettingsIcon, Volume2, VolumeX } from "lucide-react"
 import { cn } from "@/lib/utils"
 import CurrentTimeDisplay from "@/components/current-time-display"
+import { PageHeader } from "@/components/page-header"
 
 export default function PomodoroPage() {
   const {
@@ -62,11 +63,7 @@ export default function PomodoroPage() {
 
   return (
     <div className="min-h-screen p-4 md:p-6">
-      <header className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl md:text-3xl font-bold">Pomodoro Timer</h1>
-        <CurrentTimeDisplay />
-        
-      </header>
+      <PageHeader title="Pomodoro Timer" icon={<Timer className="h-6 w-6" />} />
 
       <div className="max-w-2xl mx-auto">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">

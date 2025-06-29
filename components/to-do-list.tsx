@@ -35,8 +35,8 @@ export default function TodoPopup() {
     if (typeof window === "undefined") return
     const stored = localStorage.getItem("journal-entries")
     setEntries(stored ? JSON.parse(stored) : [])
-  }, [isOpen]) // reload when popup opens to stay in sync
-
+  }, []) // 🔁 no dependency on isOpen
+  
   // Calculate position when popup opens
   useEffect(() => {
     if (isOpen && buttonRef.current) {
@@ -104,10 +104,10 @@ export default function TodoPopup() {
     <div className="relative">
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                 <Button
                     ref={buttonRef}
-                    className="rounded-full h-14 w-14 shadow-lg text-2xl flex items-center justify-center"
+                    className="rounded-full h-12 w-12 shadow-lg text-2xl flex items-center justify-center"
                     onClick={() => setIsOpen(!isOpen)}
                     aria-label="Show all todos"
                 >

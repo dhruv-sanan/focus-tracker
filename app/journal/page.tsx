@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState, useEffect } from "react"
 import { format } from "date-fns"
-import { Calendar, ChevronLeft, ChevronRight, Save, Trash2 } from "lucide-react"
+import {  BookOpen, ChevronLeft, ChevronRight, Save, Trash2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Textarea } from "@/components/ui/textarea"
 import { Card } from "@/components/ui/card"
@@ -16,6 +16,14 @@ import { Separator } from "@/components/ui/separator"
 import { Badge } from "@/components/ui/badge"
 import { useToast } from "@/hooks/use-toast"
 import CurrentTimeDisplay from "@/components/current-time-display"
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover"
+import { Calendar as CalendarIcon } from "lucide-react"
+import { Calendar } from "@/components/ui/calendar"
+import { PageHeader } from "@/components/page-header"
 
 interface JournalEntry {
   id: string
@@ -33,6 +41,8 @@ export default function JournalPage() {
   const [isLoading, setIsLoading] = useState(true)
   const { theme } = useTheme()
   const { toast } = useToast()
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
 
   // Initialize current date safely (handles SSR)
   useEffect(() => {
@@ -72,7 +82,7 @@ export default function JournalPage() {
           id: dateString,
           date: dateString,
           content: "",
-          mood: "neutral",
+          mood: "",
           tasks: [],
         })
       }
@@ -240,10 +250,7 @@ export default function JournalPage() {
 
   return (
     <div className="min-h-screen p-6">
-      <header className="flex items-center justify-between mb-8">
-        <h1 className="text-3xl font-bold">Daily Journal</h1>
-        <CurrentTimeDisplay />
-      </header>
+      <PageHeader title="Daily Journal" icon={<BookOpen className="h-6 w-6" />} />
 
       <div className="flex flex-col space-y-6">
         <div className="flex items-center justify-between">
@@ -251,10 +258,36 @@ export default function JournalPage() {
             <Button variant="outline" size="icon" onClick={handlePreviousDay}>
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <div className="flex items-center space-x-2">
-              <Calendar className="h-5 w-5 text-primary" />
-              <span className="font-medium">{formattedDate}</span>
-            </div>
+            <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="pl-3 text-left font-normal w-[240px]"
+                >
+                  {currentDate ? (
+                    format(currentDate, "EEEE, MMMM d, yyyy")
+                  ) : (
+                    <span>Pick a date</span>
+                  )}
+                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  mode="single"
+                  selected={currentDate ?? new Date()}
+                  onSelect={(date) => {
+                    if (date) {
+                      setCurrentDate(date)
+                      setIsCalendarOpen(false)
+                    }
+                  }}                  
+                  disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
+
             <Button variant="outline" size="icon" onClick={handleNextDay}>
               <ChevronRight className="h-4 w-4" />
             </Button>
@@ -273,7 +306,6 @@ export default function JournalPage() {
                   </Badge>
                 )}
               </TabsTrigger>
-              <TabsTrigger value="mood">Mood</TabsTrigger>
             </TabsList>
 
             <TabsContent value="journal" className="space-y-4">
@@ -337,7 +369,6 @@ export default function JournalPage() {
               </Card>
             </TabsContent>
 
-            <TabsContent value="mood" className="space-y-4">
               <Card className="p-6">
                 <Label className="text-lg mb-4 block">How are you feeling today?</Label>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -354,7 +385,6 @@ export default function JournalPage() {
                   ))}
                 </div>
               </Card>
-            </TabsContent>
           </Tabs>
         )}
       </div>

@@ -19,7 +19,8 @@ const withPWA = nextPWA({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
   register: true,
-  skipWaiting: true,
+  skipWaiting: false,
+  swSrc: "public/custom-sw.js",
    // exclude Next.js internals from precache
    buildExcludes: [
     /app-build-manifest\.json$/,
